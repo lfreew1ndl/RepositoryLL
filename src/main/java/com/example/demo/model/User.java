@@ -2,11 +2,13 @@ package com.example.demo.model;
 
 
 import com.example.demo.enums.UserType;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.lang.NonNull;
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
