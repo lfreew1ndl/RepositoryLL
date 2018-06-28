@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+</head>
+
+<body ng-app="App">
+User
+<div ng-controller="User as ctrl" id="block">
+    <div class="container-fluid">
+        <div class="datagrid">
+            <table>
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>type</th>
+                    <th>balance</th>
+                    <th>lastRequest</th>
+                    <th style="width: 50px;" class="text-right">
+                        <button type="button" class="btn-success" data-toggle="modal" data-target="#addModal"
+                                style="width: 63px">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in users">
+                    <td scope="row">{{item.id}}</td>
+                    <td scope="row">{{item.name}}</td>
+                    <td scope="row">{{item.type}}</td>
+                    <td scope="row">{{item.balance}}</td>
+                    <td scope="row">{{item.lastRequest}}</td>
+                    <td scope="row" class="text-right">
+                        <button type="button" class="btn-warning" data-toggle="modal" data-target="#updateModal"
+                                ng-click="ctrl.startUpdateUser(item.id,item.name,item.type,item.balance,item.lastRequest)"
+                                style="width: 30px">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button type="button" class="btn-danger" ng-click="ctrl.delFromUser(item.id)"
+                                style="width: 30px">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--Добавлення-->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">Adding</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрити">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Enter Name
+                        <br>
+                        <input type="text" id="UserName">
+                        <br>
+                        Select type
+                        <br>
+                        <select id="UserType">
+                            <option>user</option>
+                            <option>pro</option>
+                            <option>vip</option>
+                            <option>gold</option>
+                            <option>deluxe</option>
+                            <option>mod</option>
+                            <option>admin</option>
+                            <option>owner</option>
+                        </select>
+                        <br>
+                        Enter Balance
+                        <br>
+                        <input type="number" id="UserBalance">
+                        <br>
+                        Select lastRequest
+                        <input class="form-control" type="date" id="UserLastRequest">
+                        <br>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="ctrl.insertToUser()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оновлення-->
+        <div class="modal fade" id="updateModal" tabindex="-2" role="dialog" aria-labelledby="updateModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateModalLabel">Обновлення запису</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрити">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Id
+                        <div id="UserIdUPD"></div>
+                        Enter Name
+                        <br>
+                        <input type="text" id="UserNameUPD">
+                        <br>
+                        Select type
+                        <br>
+                        <select id="UserTypeUPD">
+                            <option>user</option>
+                            <option>pro</option>
+                            <option>vip</option>
+                            <option>gold</option>
+                            <option>deluxe</option>
+                            <option>mod</option>
+                            <option>admin</option>
+                            <option>owner</option>
+                        </select>
+                        <br>
+                        Enter Balance
+                        <br>
+                        <input type="number" id="UserBalanceUPD">
+                        <br>
+                        Select lastRequest
+                        <input class="form-control" type="date" id="UserLastRequestUPD">
+                        <br>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="ctrl.updateUser()">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+</body>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/user.js"></script>
+
+</html>
