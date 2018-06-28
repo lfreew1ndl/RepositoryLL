@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "MyUser")
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
